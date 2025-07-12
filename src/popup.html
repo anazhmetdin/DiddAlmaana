@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 280px;
+            padding: 12px;
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            color: #333;
+        }
+
+        .domain-info {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+            padding: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+
+        .controls {
+            margin-bottom: 15px;
+        }
+
+        .control-group {
+            margin-bottom: 10px;
+        }
+
+        .control-label {
+            font-size: 11px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .toggle-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .remove-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .small-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            width: auto;
+        }
+
+        .toggle-btn:hover {
+            background-color: #45a049;
+        }
+
+        .toggle-btn.disabled {
+            background-color: #f44336;
+        }
+
+        .toggle-btn.disabled:hover {
+            background-color: #da190b;
+        }
+
+        .toggle-btn.neutral {
+            background-color: #2196F3;
+        }
+
+        .toggle-btn.neutral:hover {
+            background-color: #1976D2;
+        }
+
+        .status {
+            font-size: 10px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .example {
+            font-size: 11px;
+            color: #666;
+            margin-top: 15px;
+            padding: 5px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+        }
+
+        .example-before {
+            margin-bottom: 5px;
+        }
+
+        .example-after {
+            font-weight: bold;
+        }
+
+        .separator {
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .options-btn {
+            background-color: white;
+            border: 1px solid gray;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 2px 2px;
+            border-radius: 25%;
+        }
+
+        .options-btn:hover {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <button id="optionsBtn" class="options-btn">⚙️</button>
+        <div class="title">إزالة النقاط العربية</div>
+    </div>
+
+    <div class="domain-info" id="domainInfo">
+        جارٍ تحميل...
+    </div>
+    
+    <div class="separator"></div>
+
+    <div class="controls">
+
+        <div class="control-group">
+            <span class="control-label">جميع المواقع:</span>
+            <button id="globalBtn" class="toggle-btn">
+                جار التحميل...
+            </button>
+            <div class="status" id="globalStatus"></div>
+        </div>
+
+        <div class="separator"></div>
+        
+        <div class="control-group">
+            <span class="control-label">هذا الموقع:</span>
+            <button id="domainBtn" class="toggle-btn">
+                جارٍ تحميل...
+            </button>
+            <div class="status" id="domainStatus"></div>
+            <button id="removeDomainBtn" class="toggle-btn remove-btn small-btn hidden" style="margin-top:5px;">
+               إزالة التخصيص
+            </button>
+        </div>
+    </div>
+
+    <div class="example">
+        <div class="example-before">قبل: تجربة نص</div>
+        <div class="example-after">بعد: ٮحرٮه ٮص</div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

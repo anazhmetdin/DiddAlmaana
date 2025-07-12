@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>إعدادات إزالة النقاط العربية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border-right: 4px solid #4CAF50;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .global-control {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .toggle-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 10px;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background-color: #45a049;
+        }
+
+        .toggle-btn.disabled {
+            background-color: #f44336;
+        }
+
+        .toggle-btn.disabled:hover {
+            background-color: #da190b;
+        }
+
+        .global-status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .domain-section {
+            margin-top: 20px;
+        }
+
+        .add-domain {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .add-domain input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .add-domain input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .add-domain button {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-domain button:hover {
+            background-color: #1976D2;
+        }
+
+        .domain-list {
+            margin-top: 20px;
+        }
+
+        .domain-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .domain-name {
+            font-weight: bold;
+            color: #333;
+            direction: ltr;
+            text-align: left;
+            flex: 1;
+        }
+
+        .domain-status {
+            margin: 0 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .domain-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .small-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .enable-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .enable-btn:hover {
+            background-color: #45a049;
+        }
+
+        .disable-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .disable-btn:hover {
+            background-color: #da190b;
+        }
+
+        .remove-btn {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .remove-btn:hover {
+            background-color: #e68900;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .import-export {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+
+        .import-export h3 {
+            margin-top: 0;
+            color: #1976D2;
+        }
+
+        .import-export button {
+            margin-left: 10px;
+            padding: 8px 16px;
+            background-color: #1976D2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .import-export button:hover {
+            background-color: #1565C0;
+        }
+
+        .example-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3e0;
+            border-radius: 4px;
+            border-right: 4px solid #ff9800;
+        }
+
+        .example-text {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .example-before {
+            color: #666;
+        }
+
+        .example-after {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background-color: #f44336;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>إعدادات إزالة النقاط العربية</h1>
+        <p class="subtitle">
+            <strong>ضد المعنى</strong> — مش لازم دايما نفهم كل حاجة
+        </p>
+        <!-- Global Settings Section -->
+        <div class="section">
+            <h2>الإعداد العام</h2>
+            <div class="global-control">
+                <button id="globalToggle" class="toggle-btn">
+                    تفعيل لجميع المواقع
+                </button>
+                <div class="global-status" id="globalStatus">
+                    مفعل افتراضياً لجميع المواقع
+                </div>
+            </div>
+        </div>
+
+        <!-- Domain-Specific Settings Section -->
+        <div class="section">
+            <h2>إعدادات المواقع المخصصة</h2>
+            <div class="domain-section">
+                <div class="add-domain">
+                    <input type="text" id="domainInput" placeholder="example.com" dir="ltr">
+                    <button id="addDomainBtn">إضافة موقع</button>
+                </div>
+
+                <div class="domain-list" id="domainList">
+                    <div class="empty-state" id="emptyState">
+                        لا توجد مواقع مخصصة حالياً
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="section">
+            <h2>الإحصائيات</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number" id="totalDomains">0</div>
+                    <div class="stat-label">إجمالي المواقع</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="enabledDomains">0</div>
+                    <div class="stat-label">المواقع المفعلة</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="disabledDomains">0</div>
+                    <div class="stat-label">المواقع المعطلة</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Import/Export Section -->
+        <div class="section">
+            <div class="import-export">
+                <h3>النسخ الاحتياطي والاستعادة</h3>
+                <button id="exportBtn">تصدير الإعدادات</button>
+                <button id="importBtn">استيراد الإعدادات</button>
+                <input type="file" id="importFile" accept=".json" class="hidden">
+                <button id="resetBtn" style="background-color: #f44336; margin-right: 20px;">إعادة تعيين جميع
+                    الإعدادات</button>
+            </div>
+        </div>
+
+        <!-- Example Section -->
+        <div class="example-section">
+            <h2>مثال على التحويل</h2>
+            <div class="example-text example-before">
+                النص الأصلي: تجربة إزالة النقاط من الحروف العربية
+            </div>
+            <div class="example-text example-after">
+                النص المحول: ٮحرٮه ارالة الٮڡاط مں الحروف العرٮٮه
+            </div>
+        </div>
+        
+        <!-- Contribution Section -->
+        <div style="text-align: center; margin-top: 40px; color: #555; font-size: 14px;">
+            💡 هل عندك فكرة؟ شاركها على
+            <a href="https://github.com/anazhmetdin/DiddAlmaana" target="_blank" rel="noreferrer noopener"
+            style="color: #1976D2; text-decoration: none;">
+                Didd al-Maʿna
+            </a>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+    <script src="options.js"></script>
+</body>
+
+</html>
