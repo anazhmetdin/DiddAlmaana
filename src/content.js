@@ -27,7 +27,7 @@ const arabicMapping = {
     'ڨ': 'ٯ', // qaf variant -> qaf without dots
 
     // Additional forms
-    'ئ': 'ی', // yeh with hamza -> yeh without dots
+    'ئ': 'ى', // yeh with hamza -> yeh without dots
     'ڭ': 'ك', // ng -> kaf
     'ݣ': 'ک', // gaf -> kaf
     'ك': 'ك', // kaf (already without dots)
