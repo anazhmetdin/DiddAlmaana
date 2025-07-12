@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "Didd al-Maʿna",
+  "version": "1.0",
+  "description": "Remove Niqat (نقاط) from Arabic letters on web pages",
+
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "action": {
+    "default_title": "Toggle Arabic Dot Removal",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "arabic-dot-remover@anazhmetdin.com"
+    }
+  }
+}

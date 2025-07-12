@@ -10,6 +10,7 @@ const arabicMapping = {
 
     // Letters with dots below
     'ب': 'ٮ', // beh -> beh without dots
+    'پ': 'ٮ', // beh -> beh without dots
     'ج': 'ح', // jeem -> hah
     'چ': 'ح', // cheh -> hah
     'خ': 'ح', // khah -> hah

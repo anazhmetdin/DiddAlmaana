@@ -1,14 +1,11 @@
 let globalEnabled = true;
 let domainSettings = {};
 chrome = chrome || browser;
+browserAction = chrome.action || chrome.browserAction;
 
 function injectAndSend(tab) {
     if (!isSupportedUrl(tab.url)) return;
-
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ['content.js']
-    }, () => {
+    const callback = () => {
         if (chrome.runtime.lastError) {
             console.error(`Injection failed for ${tab.url}:`, chrome.runtime.lastError.message);
         } else {
@@ -19,12 +16,22 @@ function injectAndSend(tab) {
                 enabled: enabled
             });
         }
-    });
+    };
+
+    if (chrome.scripting)
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            files: ['content.js']
+        }, callback);
+    else
+        chrome.tabs.executeScript(tab.id, { file: 'content.js' }, callback);
 }
 
-chrome.tabs.query({}, (tabs) => {
-    tabs.forEach(injectAndSend);
-});
+if (typeof browser == 'undefined')
+    chrome.tabs.query({}, (tabs) => {
+        console.log(`Injecting content script into ${tabs.length} tabs...`);
+        tabs.forEach(injectAndSend);
+    });
 
 // Load saved state on startup
 chrome.storage.sync.get(['arabicDotRemoverEnabled', 'arabicDomainSettings'], (result) => {
@@ -69,7 +76,9 @@ function isSupportedUrl(url) {
         !url.startsWith('edge://') &&
         !url.startsWith('about://') &&
         !url.startsWith('https://chrome.google') &&
-        !url.startsWith('https://chromewebstore.google');
+        !url.startsWith('https://chromewebstore.google') &&
+        !url.startsWith('moz-extension://') &&
+        !url.startsWith('https://addons.mozilla.org/');
 }
 
 // Helper: Update single tab
@@ -103,7 +112,7 @@ function updateAllTabs(filterDomain = null) {
 }
 
 // Click on icon handler
-chrome.action.onClicked.addListener((tab) => {
+browserAction.onClicked.addListener((tab) => {
     globalEnabled = !globalEnabled;
     chrome.storage.sync.set({ arabicDotRemoverEnabled: globalEnabled });
     updateAllTabs();
