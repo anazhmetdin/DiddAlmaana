@@ -153,14 +153,13 @@ function processTextNode(node) {
     const originalText = node.textContent;
     if (!originalText.trim()) return;
 
-    if (!originalTexts.has(node)) {
-        originalTexts.set(node, originalText);
-    }
-
     if (isEnabled) {
         const processedText = removeDots(originalText);
         if (processedText !== originalText) {
             node.textContent = processedText;
+            if (!originalTexts.has(node)) {
+                originalTexts.set(node, originalText);
+            }
         }
     }
 }
